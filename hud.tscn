@@ -1,0 +1,101 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/noto_sans_ui_regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://cubes.tscn" type="PackedScene" id=2]
+[ext_resource path="res://hud.gd" type="Script" id=3]
+[ext_resource path="res://scripts/micin.gd" type="Script" id=4]
+[ext_resource path="res://scripts/spectrum.gd" type="Script" id=5]
+[ext_resource path="res://scripts/Viewport.gd" type="Script" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 2 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 1000, 1000 )
+handle_input_locally = false
+render_target_update_mode = 3
+shadow_atlas_size = 4096
+script = ExtResource( 6 )
+
+[node name="Cubes" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
+transform = Transform( 1, -1.212, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+script = ExtResource( 4 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 3.2287
+margin_top = 507.038
+margin_right = 133.229
+margin_bottom = 599.038
+grow_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scale" type="Label" parent="VBoxContainer"]
+margin_right = 130.0
+margin_bottom = 28.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.752941 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_constants/shadow_as_outline = 0
+text = "Scale: 100%"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Filter" type="Label" parent="VBoxContainer"]
+margin_top = 32.0
+margin_right = 130.0
+margin_bottom = 60.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.752941 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_constants/shadow_as_outline = 0
+text = "Filter: Enabled"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Energy" type="Label" parent="VBoxContainer"]
+margin_top = 64.0
+margin_right = 130.0
+margin_bottom = 92.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = -560.0
+rect_rotation = 90.0
+rect_pivot_offset = Vector2( 80, 80 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Node2D" type="Node2D" parent="VBoxContainer2"]
+position = Vector2( -15, -350 )
+scale = Vector2( 1, 5 )
+script = ExtResource( 5 )
